@@ -1,11 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { esablishMongoConnection } from '../../utils/MongoDBHelpers';
+import { getMongoDBInstance } from '../../utils/MongoDBHelpers';
 
-const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
-  const db = await esablishMongoConnection();
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const db = getMongoDBInstance();
+
+  if (req.method !== 'POST') {
+    res.status(500)
+  }
 
   try {
-    const doc = await db.collection('urls').find({p: 2});
+    const doc = await db.collection('urls').find({ p: 2 });
     const result = await doc.toArray();
 
     if (result.length !== 0) {

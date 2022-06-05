@@ -13,3 +13,5 @@ export const esablishMongoConnection = async () => {
 
   return client.db('MorganDB');
 };
+
+export const getMongoDBInstance = () => client.db('MorganDB');
