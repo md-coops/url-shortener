@@ -1,22 +1,20 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiResponse } from 'next';
+import { PostUrlRequest } from '../../types';
 import { getMongoDBInstance } from '../../utils/MongoDBHelpers';
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: PostUrlRequest, res: NextApiResponse) => {
   const db = getMongoDBInstance();
+  const record = req.body;
 
   if (req.method !== 'POST') {
-    res.status(500)
+    res.status(500);
   }
 
-  try {
-    const doc = await db.collection('urls').find({ p: 2 });
-    const result = await doc.toArray();
 
-    if (result.length !== 0) {
-      res.status(200).send(result);
-    } else {
-      res.status(404).send([]);
-    }
+  try {
+    const newRecord = await db.collection('urls').insertOne(record);
+    await db.collection('reseveredEncriptedUrls')
+    res.status(200).send(newRecord);
   } catch (e) {
     res.status(500).send(null);
   }

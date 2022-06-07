@@ -28,6 +28,10 @@
   flex-grow: 1;
 }
 
+.footer span {
+  height: 1.5rem
+}
+
 .title a {
   color: #0070f3;
   text-decoration: none;

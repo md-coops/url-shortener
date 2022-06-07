@@ -5,7 +5,7 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
   const db = await esablishMongoConnection();
 
   try {
-    const doc = await db.collection('urls').find({p: 2});
+    const doc = await db.collection('urls').find();
     const result = await doc.toArray();
 
     if (result.length !== 0) {
