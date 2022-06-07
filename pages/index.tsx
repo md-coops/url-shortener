@@ -4,32 +4,43 @@ import styles from '../styles/Home.module.css';
 import fetch from 'isomorphic-unfetch';
 import { Record } from '../types';
 import { useState } from 'react';
+import { List } from '../components/List';
+import { recordsToEncriptedURLs } from '../utils/mappers';
 
 type Props = {
-  data?: { existingRecords: Record[] };
+  data: Record[];
   status: number;
   statusText: string;
 };
 
+// const mockencriptedUrls = [
+//   { url: 'qwert', id: '12345' },
+//   { url: 'qwert', id: '123456' },
+// ];
+
 const Home: NextPage<Props> = ({ data, status, statusText }) => {
-  const [ encriptedUrls, setEncriptedUrls ] = useState<Record[]>(data?.existingRecords);
+  const [encriptedUrls, setEncriptedUrls] = useState(
+    recordsToEncriptedURLs(data)
+    // mockencriptedUrls
+  );
   console.log(encriptedUrls);
   return (
     <div className={styles.container}>
       <Head>
         <title>Url Shortener</title>
-        <meta name='description' content='appliction-to-generate-shortened-URLs' />
+        <meta
+          name='description'
+          content='appliction-to-generate-shortened-URLs'
+        />
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to URL shortener
-        </h1>
+        <h1 className={styles.title}>Welcome to URL shortener</h1>
 
         <p className={styles.description}>
           Please see a list of our shortened URLs
         </p>
-        {encriptedUrls}
+        <List listItems={encriptedUrls} />
       </main>
 
       <footer className={styles.footer}>
@@ -39,14 +50,14 @@ const Home: NextPage<Props> = ({ data, status, statusText }) => {
   );
 };
 
-export async function getStaticProps() {
+export async function getStaticProps(): Promise<{ props: Props }> {
   const response = await fetch('http://localhost:3000/api/getAllShortenedUrl');
 
   try {
     const json = await response.json();
     return {
       props: {
-        data: { existingRecords: json },
+        data: json,
         status: response.status,
         statusText: response.statusText,
       },
@@ -54,6 +65,7 @@ export async function getStaticProps() {
   } catch {
     return {
       props: {
+        data: [],
         status: response.status,
         statusText: response.statusText,
       },
