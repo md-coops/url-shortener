@@ -18,7 +18,6 @@ const listItemRenderer = (listItem: ListItem) => {
 };
 
 export const List: FC<Props> = ({ listItems }) => {
-  console.log(listItems);
   return (
     <ul>
       {listItems.map(Listitem => (
