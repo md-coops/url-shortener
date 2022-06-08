@@ -1,8 +1,10 @@
-import { Record } from '../types';
+import { MongoRecordDTO, DTOtoEntiy, EnriptedURLRecord } from '../types';
 
-export const recordsToEncriptedURLs = (records: Record[]) => {
-    return records.map(record => ({
-        url: record.encriptedUrl,
-        id: record.id,
-    }))
+
+
+export const recordsToEncriptedURLs: DTOtoEntiy<MongoRecordDTO[], EnriptedURLRecord[]> = records => {
+  return records.map(record => ({
+    encryptedUrl: record.encryptedUrl,
+    id: record._id,
+  }));
 };

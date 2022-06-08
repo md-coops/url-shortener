@@ -2,28 +2,22 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import fetch from 'isomorphic-unfetch';
-import { Record } from '../types';
+import { MongoRecordDTO } from '../types';
 import { useState } from 'react';
 import { List } from '../components/List';
 import { recordsToEncriptedURLs } from '../utils/mappers';
 
 type Props = {
-  data: Record[];
+  data: MongoRecordDTO[];
   status: number;
   statusText: string;
 };
 
-// const mockencriptedUrls = [
-//   { url: 'qwert', id: '12345' },
-//   { url: 'qwert', id: '123456' },
-// ];
-
 const Home: NextPage<Props> = ({ data, status, statusText }) => {
   const [encriptedUrls, setEncriptedUrls] = useState(
     recordsToEncriptedURLs(data)
-    // mockencriptedUrls
   );
-  console.log(encriptedUrls);
+
   return (
     <div className={styles.container}>
       <Head>

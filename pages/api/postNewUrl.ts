@@ -4,10 +4,12 @@ import { getMongoDBInstance } from '../../utils/MongoDBHelpers';
 
 const handler = async (req: PostUrlRequest, res: NextApiResponse) => {
   const db = getMongoDBInstance();
-  const record = req.body;
+  // const record = req.body;
+
+  console.log(req.body);
 
   if (req.method !== 'POST') {
-    res.status(500);
+    res.status(500).send(null);
   }
 
 

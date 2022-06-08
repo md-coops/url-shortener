@@ -1,11 +1,18 @@
 import type { NextApiRequest } from 'next';
 
-export type Record = {
-  id: string;
+export type MongoRecordDTO = {
+  _id: string;
   originalUrl: string;
-  encriptedUrl: string;
+  encryptedUrl: string;
 };
 
+export type EnriptedURLRecord = {
+  id: string;
+  encryptedUrl: string;
+};
+
+export type DTOtoEntiy<DTO, Entity> = (dto: DTO) => Entity;
+
 export interface PostUrlRequest extends NextApiRequest {
-  body: { url: string, dateCreated: Date };
+  body: { url: string };
 }
