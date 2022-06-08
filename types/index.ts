@@ -1,4 +1,4 @@
-import type { NextApiRequest } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 export type MongoRecordDTO = {
   _id: string;
@@ -12,7 +12,3 @@ export type EnriptedURLRecord = {
 };
 
 export type DTOtoEntiy<DTO, Entity> = (dto: DTO) => Entity;
-
-export interface PostUrlRequest extends NextApiRequest {
-  body: { url: string };
-}

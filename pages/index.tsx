@@ -6,6 +6,7 @@ import { MongoRecordDTO } from '../types';
 import { useState } from 'react';
 import { List } from '../components/List';
 import { recordsToEncriptedURLs } from '../utils/mappers';
+import { UrlForm } from '../components/UrlForm';
 
 type Props = {
   data: MongoRecordDTO[];
@@ -35,6 +36,10 @@ const Home: NextPage<Props> = ({ data, status, statusText }) => {
           Please see a list of our shortened URLs
         </p>
         <List listItems={encriptedUrls} />
+        <UrlForm
+          encriptedUrls={encriptedUrls}
+          setEncryptedUrls={setEncriptedUrls}
+        />
       </main>
 
       <footer className={styles.footer}>
@@ -48,10 +53,10 @@ export async function getStaticProps(): Promise<{ props: Props }> {
   const response = await fetch('http://localhost:3000/api/getAllShortenedUrl');
 
   try {
-    const json = await response.json();
+    const ResponseJson: MongoRecordDTO[] = await response.json();
     return {
       props: {
-        data: json,
+        data: ResponseJson,
         status: response.status,
         statusText: response.statusText,
       },

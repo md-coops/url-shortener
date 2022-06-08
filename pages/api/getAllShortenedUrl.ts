@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { esablishMongoConnection } from '../../utils/MongoDBHelpers';
+import { getMongoDBInstance } from '../../utils/MongoDBHelpers';
 
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
-  const db = await esablishMongoConnection();
+  const db = await getMongoDBInstance();
 
   try {
     const doc = await db.collection('urls').find();

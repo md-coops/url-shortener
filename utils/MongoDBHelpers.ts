@@ -5,14 +5,12 @@ const client = new MongoClient(
   // 'mongodb://morgan:1234@0.0.0.0:3333/'
 );
 
-export const esablishMongoConnection = async () => {
+export const getMongoDBInstance = async () => {
   try {
     await client.connect();
   } catch (error: any) {
     throw new Error(error);
   }
-  
+
   return client.db('MorganDB');
 };
-
-export const getMongoDBInstance = () => client.db('MorganDB');
