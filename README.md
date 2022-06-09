@@ -3,7 +3,7 @@
 ## Starting The App and Downlaoing Dependencies
 ### Mongo DB
 This app uses MonogoDB to store records, you will need a MongoBD account.
-Add the following connection string to `MONGO_DB_CONNECTION_STRING` in `~/.env.local` replacing the entities with your own details; "mongodb+srv://~username~:~password~@~your-cluster-url~/test?retryWrites=true&w=majority"
+Add the following connection string to `MONGO_DB_CONNECTION_STRING` in `~/.env.local` replacing the entities with your own details; "mongodb+srv://\{username\}:\{password\}@\{your-cluster-url\}/test?retryWrites=true&w=majority"
 If you wish to run MonogDB in docker for a more streamlined development experince, please add the URI to your local MongoDB instance. This proved helpful for devlopment of the application so far.
 Add the database name you would like to add records to under `MONGO_DB_DATABASE` in `~/.env.local`.
 Add the `API_BASE_URL` to both `~/.env.local` and `~/next.config.json` to set the url to both the node environment and client environment respectivly.
