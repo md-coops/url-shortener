@@ -6,7 +6,7 @@ export type MongoRecordDTO = {
   encryptedUrl: string;
 };
 
-export type EnriptedURLRecord = {
+export type EnryptedURLRecord = {
   id: string;
   encryptedUrl: string;
 };

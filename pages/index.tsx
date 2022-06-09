@@ -14,7 +14,7 @@ type Props = {
   statusText: string;
 };
 
-const Home: NextPage<Props> = ({ data, status, statusText }) => {
+const Home: NextPage<Props> = ({ data }) => {
   const [encriptedUrls, setEncriptedUrls] = useState(
     recordsToEncriptedURLs(data)
   );

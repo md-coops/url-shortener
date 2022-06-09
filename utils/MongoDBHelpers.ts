@@ -9,8 +9,8 @@ export const getMongoDBInstance = async () => {
   try {
     await client.connect();
   } catch (error: any) {
+    console.log('this has thrown');
     throw new Error(error);
   }
-
   return client.db('MorganDB');
 };
