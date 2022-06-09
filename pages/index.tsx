@@ -14,10 +14,11 @@ type Props = {
   statusText: string;
 };
 
-const Home: NextPage<Props> = ({ data }) => {
+const Home: NextPage<Props> = ({ data, status, statusText }) => {
   const [encriptedUrls, setEncriptedUrls] = useState(
     recordsToEncriptedURLs(data)
   );
+  const shouldDisplayPreFetchError = status !== 200;
 
   return (
     <div className={styles.container}>
@@ -31,17 +32,21 @@ const Home: NextPage<Props> = ({ data }) => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome to URL shortener</h1>
-
         <p className={styles.description}>
           Please see a list of our shortened URLs
         </p>
+        {shouldDisplayPreFetchError &&
+          <p
+            className={styles.failureMessage}
+          >{`Failed to pre-fetch exisitng records, server responded with status code ${status}: "${statusText}"`}</p>
+        }
         <List listItems={encriptedUrls} />
         <UrlForm
           encriptedUrls={encriptedUrls}
           setEncryptedUrls={setEncriptedUrls}
         />
       </main>
-
+      
       <footer className={styles.footer}>
         <span>Written By Morgan Cooper, mdcooper98@gmail.com</span>
       </footer>
@@ -50,7 +55,7 @@ const Home: NextPage<Props> = ({ data }) => {
 };
 
 export async function getStaticProps(): Promise<{ props: Props }> {
-  const response = await fetch('http://localhost:3000/api/getAllShortenedUrl');
+  const response = await fetch('http://localhost:3000/api/getAllShortenedUrlk');
 
   try {
     const ResponseJson: MongoRecordDTO[] = await response.json();

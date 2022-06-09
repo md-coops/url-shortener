@@ -1,6 +1,7 @@
 import { ChangeEvent, useState, FC, Dispatch, SetStateAction } from 'react';
 import type { EnryptedURLRecord, MongoRecordDTO } from '../types';
 import { recordsToEncriptedURLs } from '../utils/mappers';
+import styles from '../styles/UrlForm.module.css';
 
 type Props = {
   encriptedUrls: EnryptedURLRecord[];
@@ -20,21 +21,27 @@ export const UrlForm: FC<Props> = ({ encriptedUrls, setEncryptedUrls }) => {
       method: 'post',
       body: JSON.stringify({ url: formValue }),
     });
-    const jsonResponse: MongoRecordDTO = await response.json();
 
-    setEncryptedUrls([
-      ...encriptedUrls,
-      ...recordsToEncriptedURLs([jsonResponse]),
-    ]);
+    try {
+      const jsonResponse: MongoRecordDTO = await response.json();
+
+      setEncryptedUrls([
+        ...encriptedUrls,
+        ...recordsToEncriptedURLs([jsonResponse]),
+      ]);
+    } catch {
+        alert('somehting has gone wrong processing your request, please check the stack trace.')
+    }
   };
 
   return (
-    <form onSubmit={HandleFormSubmit}>
-      <label>
-        URL:
-        <input type='text' value={formValue} onChange={handleFormChange} />
-      </label>
-      <input type='submit' value='Generate' />
-    </form>
+    <div className={styles.form}>
+      <form onSubmit={HandleFormSubmit}>
+        <label>URL:</label>
+        <input type='url' value={formValue} onChange={handleFormChange} />
+
+        <input type='submit' value='Generate' />
+      </form>
+    </div>
   );
 };

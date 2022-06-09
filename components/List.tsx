@@ -1,4 +1,5 @@
 import { FC, ReactNode } from 'react';
+import styles from '../styles/List.module.css';
 
 type ListItem = { id: string; [key: string]: ReactNode };
 type Props = {
@@ -19,7 +20,7 @@ const listItemRenderer = (listItem: ListItem) => {
 
 export const List: FC<Props> = ({ listItems }) => {
   return (
-    <ul>
+    <ul className={styles.list}>
       {listItems.map(Listitem => (
         <li key={Listitem.id}>{listItemRenderer(Listitem)}</li>
       ))}

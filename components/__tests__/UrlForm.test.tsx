@@ -46,7 +46,7 @@ describe('URL form', () => {
     expect(mockSetState).toHaveBeenCalledTimes(1);
   });
 
-  it('should fire the global fetch HTTP client when submit button is clicked and then call mockSetEncryptedUrls', async () => {
+  it('should fire the global fetch HTTP method when submit button is clicked and then call mockSetEncryptedUrls', async () => {
     render(
       <UrlForm
         encriptedUrls={mockEncryptedUrls}

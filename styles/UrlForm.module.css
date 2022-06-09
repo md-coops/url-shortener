@@ -1,0 +1,30 @@
+.form {
+    max-width: 50rem;
+    width: 100%;
+}
+
+.form * {
+    height: fit-content;
+    align-items: center;
+}
+
+.form form {
+    display: flex;
+    align-content: center;
+}
+
+.form label {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.form input[type="url"] {
+    flex-grow: 5;
+    margin: 0 2rem
+}
+
+.form input[type="submit"] {
+    flex-grow: 1
+}
