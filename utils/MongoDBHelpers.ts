@@ -1,16 +1,14 @@
 import { MongoClient } from 'mongodb';
 
 const client = new MongoClient(
-  'mongodb+srv://morgan_cooper:Fiest%402015@cluster0.sq1n6.mongodb.net/?retryWrites=true&w=majority'
-  // 'mongodb://morgan:1234@0.0.0.0:3333/'
+  process.env.MONGO_DB_CONNECTION_STRING || ''
 );
 
 export const getMongoDBInstance = async () => {
   try {
     await client.connect();
   } catch (error: any) {
-    console.log('this has thrown');
     throw new Error(error);
   }
-  return client.db('MorganDB');
+  return client.db(process.env.MONGO_DB_DATABASE);
 };

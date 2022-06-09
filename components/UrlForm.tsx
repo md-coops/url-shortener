@@ -17,7 +17,8 @@ export const UrlForm: FC<Props> = ({ encriptedUrls, setEncryptedUrls }) => {
 
   const HandleFormSubmit = async (e: any) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:3000/api/postNewUrl', {
+    setFormValue('');
+    const response = await fetch(`${process.env.API_BASE_URL}postNewUrl`, {
       method: 'post',
       body: JSON.stringify({ url: formValue }),
     });

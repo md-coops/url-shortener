@@ -35,18 +35,18 @@ const Home: NextPage<Props> = ({ data, status, statusText }) => {
         <p className={styles.description}>
           Please see a list of our shortened URLs
         </p>
-        {shouldDisplayPreFetchError &&
+        {shouldDisplayPreFetchError && (
           <p
             className={styles.failureMessage}
           >{`Failed to pre-fetch exisitng records, server responded with status code ${status}: "${statusText}"`}</p>
-        }
+        )}
         <List listItems={encriptedUrls} />
         <UrlForm
           encriptedUrls={encriptedUrls}
           setEncryptedUrls={setEncriptedUrls}
         />
       </main>
-      
+
       <footer className={styles.footer}>
         <span>Written By Morgan Cooper, mdcooper98@gmail.com</span>
       </footer>
@@ -55,7 +55,8 @@ const Home: NextPage<Props> = ({ data, status, statusText }) => {
 };
 
 export async function getStaticProps(): Promise<{ props: Props }> {
-  const response = await fetch('http://localhost:3000/api/getAllShortenedUrlk');
+  console.log(process.env.API_BASE_URL);
+  const response = await fetch(`${process.env.API_BASE_URL}getAllShortenedUrl`);
 
   try {
     const ResponseJson: MongoRecordDTO[] = await response.json();
