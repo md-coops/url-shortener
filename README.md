@@ -25,6 +25,8 @@ I have choosen not to process any laoding states in this application for simplic
 - get exisiting URLs needs no laoding state as it is server side fetched
 ### CSS
 The CSS on the page is not perfect, this could do with some impromvemnt.
+### Tests
+For timeboxing sake I have written a reduced unit test suite but in futire more unit test could be written. Coverage currently is not great.
 ### using NextJs middleware for the establishing connection and getting db instance
 Unfortunatley this was not easily possible inside NextJS middleware. Modules supported in middlewear can only contain ES modules and not use any native Node.js APIs. The MongoDB module unfortunalty leverages such prohibited APIs.
 
