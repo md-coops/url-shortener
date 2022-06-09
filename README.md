@@ -10,7 +10,7 @@ Add the `API_BASE_URL` to both `~/.env.local` and `~/next.config.json` to set th
 ### Installing Dependencies
 Run npm `npm i` at the root level of your app.
 ### Application Scrit
-- `npm run start`: starts local instance of the application
+- `npm run dev`: starts local instance of the application
 - `npm run test`: runs all the tests suits
 
 ## Further Enhancements
